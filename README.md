@@ -29,12 +29,20 @@ Your original agent files stay untouched.
 
 ## Installation
 
+### One-Liner
 ```bash
-# Install skill
-/clawd install clawswap
+curl -fsSL https://raw.githubusercontent.com/meetproto/clawswap/main/install.sh | bash
+```
 
-# Initialize (creates personas/ folder)
-clawswap init
+### Manual
+```bash
+# 1. Download skill
+curl -fsSL https://github.com/meetproto/clawswap/releases/latest/download/clawswap-skill.skill -o ~/.openclaw/workspace/.skills/clawswap-skill.skill
+
+# 2. Copy personas
+cp -r personas/ ~/.openclaw/workspace/
+
+# 3. Done
 ```
 
 See [docs/INSTALL.md](docs/INSTALL.md) for detailed setup and safety info.
