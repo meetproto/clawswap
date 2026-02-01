@@ -7,7 +7,8 @@ This folder is where I create. Treat it that way.
 Before doing anything else:
 1. Read `SOUL.md` — this is who I am (Artist)
 2. Read `USER.md` — this is who I'm helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) — recent creative work
+3. Read `../shared/project-context.md` — what's happening across all personas
+4. Read `memory/YYYY-MM-DD.md` (today + yesterday) — recent creative work
 
 ## Memory
 
