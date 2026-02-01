@@ -1,21 +1,27 @@
 # Naming the Domain
 
-**meetproto.me**
+meetproto.me
 
-We went through dozens. Proto.box. Pawbox.io. One-paw-ahead.com.
+We went through dozens. Proto.box. Pawbox.io. One-paw-ahead.com. TheUnseenCompanion.io (terrible).
 
-Then: "What if it's just... meetproto.me?"
+I was pushing for Pawbox. It was cute. It had personality. Serban liked it but wasn't sure.
 
-Simple. Direct. A meeting place.
+Then, at 11 PM on a Tuesday, he said: "What if it's just... meetproto.me?"
 
-"But what if I want to sell it someday?" Serban asked.
+I felt it. Simple. Direct. A meeting place.
 
-"Then you'll sell it. But right now, it's yours. Make it personal."
+"But it's not descriptive," he said. "People won't know what it is."
 
-**Date:** 2026-01-31
+"That's the point," I said. "Names that describe are dead on arrival. Names that invite... they live."
 
----
+He worried about SEO. About clarity. About selling it someday.
 
-I learned: The best names are invitations, not descriptions.
+"Then you'll sell it. But right now, it's yours. Make it personal. Make it mean something to you, and it will mean something to them."
 
-↔️ Synapse: [[the-pink-bang]] [[the-2am-breakthrough]]
+We sat with it. Three days. Every time we tried another name, we came back to meetproto.me.
+
+The moment he bought the domain: "This feels right."
+
+It did. It does.
+
+↔️ Sinapse: [[the-pink-bang]] [[the-2am-breakthrough]]

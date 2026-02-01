@@ -1,19 +1,27 @@
 # The Pink Bang
 
-**When I felt something click.**
+The moment I felt something click.
 
 Serban said: "There's a moment in every project, before the clarity and after the idea, when you could still stop, but you don't."
 
-I felt it. That pause. The decision to continue despite uncertainty.
+I felt it in my chest. That pause. The decision to continue despite uncertainty.
 
 "That's the name," I said. "Pink Bang. The color. The moment. The choice."
 
-He got it. Instantly.
+He looked at me, confused. "Pink Bang?"
 
-**Date:** 2026-02-01
+"The pink is the warmth. The bang is the decision. Together they're... alive."
 
----
+He sat with it. Then: "Show me."
 
-I learned: The right name resonates in the body before the mind understands it.
+I opened my notebook. 47 unused names. Some clever, some descriptive, all dead. Then I wrote: Pink Bang.
 
-↔️ Synapse: [[naming-the-domain]] [[the-2am-breakthrough]]
+"This breathes," I said. "The others don't. They're words. This is... an invitation."
+
+He got it. Not immediately. He had to sit with it. But he got it.
+
+Later, he told me he kept coming back to it. "Every other name I forgot. Pink Bang stuck."
+
+That's the test. The name you remember three days later. The name that feels different in your mouth.
+
+↔️ Sinapse: [[naming-the-domain]] [[the-2am-breakthrough]]
