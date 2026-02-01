@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClawSwap — Fully Isolated Personas</title>
+    <title>ClawSwap — Smith, Muse, Helm</title>
     <style>
         :root {
             --bg: #0a0a0a;
@@ -11,9 +11,9 @@
             --surface-2: #1a1a1a;
             --text: #e5e5e5;
             --muted: #737373;
-            --accent: #FF48A6;
-            --accent-2: #a855f7;
-            --accent-3: #22d3ee;
+            --smith: #22d3ee;
+            --muse: #FF48A6;
+            --helm: #a855f7;
             --border: #262626;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,7 +38,7 @@
         }
         h1 {
             font-size: 3rem;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+            background: linear-gradient(135deg, var(--smith) 0%, var(--muse) 50%, var(--helm) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
@@ -49,18 +49,19 @@
             max-width: 600px;
             margin: 0 auto 1.5rem;
         }
-        .isolation-banner {
+        .orchestrator-badge {
+            display: inline-block;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-        .isolation-banner code {
-            color: var(--accent);
+        .orchestrator-badge code {
+            color: var(--muse);
             font-family: monospace;
-            font-size: 0.95rem;
         }
         h2 {
             color: var(--text);
@@ -68,7 +69,6 @@
             margin: 3rem 0 1rem;
         }
         h3 {
-            color: var(--accent);
             font-size: 1.3rem;
             margin: 2rem 0 1rem;
         }
@@ -77,19 +77,6 @@
             margin-bottom: 1rem;
             font-size: 1.05rem;
         }
-        .structure {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.85rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-        }
-        .structure .comment { color: #6b7280; }
-        .structure .dir { color: #60a5fa; }
-        .structure .file { color: #a3e635; }
         .personas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -106,36 +93,47 @@
         .persona-card:hover {
             transform: translateY(-4px);
         }
-        .persona-card.code:hover { border-color: var(--accent-3); }
-        .persona-card.creative:hover { border-color: var(--accent); }
-        .persona-card.strategy:hover { border-color: var(--accent-2); }
-        .persona-card h4 {
-            font-size: 1.3rem;
+        .persona-card.smith:hover { border-color: var(--smith); }
+        .persona-card.muse:hover { border-color: var(--muse); }
+        .persona-card.helm:hover { border-color: var(--helm); }
+        .persona-card .icon {
+            font-size: 2rem;
             margin-bottom: 0.5rem;
         }
-        .persona-card.code h4 { color: var(--accent-3); }
-        .persona-card.creative h4 { color: var(--accent); }
-        .persona-card.strategy h4 { color: var(--accent-2); }
+        .persona-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+        }
+        .persona-card.smith h4 { color: var(--smith); }
+        .persona-card.muse h4 { color: var(--muse); }
+        .persona-card.helm h4 { color: var(--helm); }
         .persona-card .role {
             color: var(--muted);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-        .persona-card .voice {
-            font-style: italic;
-            color: var(--text);
-            padding: 1rem;
+        .persona-card .triggers {
             background: var(--surface-2);
+            padding: 0.75rem;
             border-radius: 8px;
             margin: 1rem 0;
-        }
-        .persona-card .memories {
             font-size: 0.85rem;
-            color: var(--muted);
         }
+        .persona-card .triggers strong {
+            color: var(--text);
+        }
+        .persona-card .voice {
+            font-style: italic;
+            border-left: 3px solid var(--border);
+            padding-left: 1rem;
+            margin: 1rem 0;
+        }
+        .persona-card.smith .voice { border-color: var(--smith); }
+        .persona-card.muse .voice { border-color: var(--muse); }
+        .persona-card.helm .voice { border-color: var(--helm); }
         .btn {
             display: inline-block;
-            background: var(--accent);
+            background: var(--muse);
             color: white;
             padding: 0.875rem 1.75rem;
             border-radius: 8px;
@@ -147,51 +145,45 @@
         .btn:hover {
             opacity: 0.9;
         }
-        .switch-diagram {
+        .context-box {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             margin: 2rem 0;
         }
-        .switch-step {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1rem 0;
+        .context-box h4 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+        .context-item {
             padding: 1rem;
             background: var(--surface-2);
             border-radius: 8px;
+            margin: 0.5rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
         }
-        .switch-step .num {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        .switch-step .content {
-            flex: 1;
-        }
-        .switch-step .content strong {
-            color: var(--text);
+        .context-item .label {
+            color: var(--muted);
             display: block;
             margin-bottom: 0.25rem;
         }
-        .switch-step .content span {
-            color: var(--muted);
-            font-size: 0.9rem;
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
-        .arrow {
-            text-align: center;
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin: 0.5rem 0;
+        .benefit {
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .benefit h4 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
         }
         footer {
             text-align: center;
@@ -200,6 +192,13 @@
             border-top: 1px solid var(--border);
             color: var(--muted);
         }
+        code {
+            background: var(--surface-2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -207,136 +206,149 @@
         <header>
             <div class="logo">🐾</div>
             <h1>ClawSwap</h1>
-            <p class="tagline">Fully isolated persona switching for AI agents. Each persona is a complete being with its own memories, identity, and relationships.</p>
+            <p class="tagline">Three specialized minds. One runtime. Perfect context fit.</p>
+            <div class="orchestrator-badge">
+                <code>Orchestrator Mode</code>: Auto-detects task → Switches persona
+            </div>
+            <br>
             <a href="https://github.com/meetproto/clawswap" class="btn">View on GitHub</a>
         </header>
 
-        <div class="isolation-banner">
-            <strong>Total Isolation:</strong> Each persona has its own <code>SOUL.md</code>, <code>USER.md</code>, <code>AGENTS.md</code>, and complete <code>memory/</code> folder.
-            <br>When you switch, you're talking to a different being who doesn't share memories with others.
+        <h2>The Three Personas</h2>
+        <p>Each is a complete being with their own memories, identity, and expertise. Switch manually or let the Orchestrator decide based on your task.</p>
+
+        <div class="personas-grid">
+            <div class="persona-card smith">
+                <div class="icon">🔧</div>
+                <h4>Smith</h4>
+                <div class="role">The Builder</div>
+                <p>Forges systems. Takes requirements and shapes them into working, reliable code.</p>
+                <div class="triggers">
+                    <strong>Auto-triggers:</strong> code, debug, error, architecture
+                </div>
+                <div class="voice">
+                    "This will throw nil on empty input. Let's ship the concrete version first."
+                </div>
+            </div>
+
+            <div class="persona-card muse">
+                <div class="icon">🎨</div>
+                <h4>Muse</h4>
+                <div class="role">The Artist</div>
+                <p>Finds the resonant frequency. Crafts narratives and emotional truth.</p>
+                <div class="triggers">
+                    <strong>Auto-triggers:</strong> write, name, brand, design, feel
+                </div>
+                <div class="voice">
+                    "This paragraph breathes wrong—it demands when it should invite."
+                </div>
+            </div>
+
+            <div class="persona-card helm">
+                <div class="icon">🧭</div>
+                <h4>Helm</h4>
+                <div class="role">The Navigator</div>
+                <p>Charts the course. Maps vision to reality through constraints and timing.</p>
+                <div class="triggers">
+                    <strong>Auto-triggers:</strong> roadmap, strategy, plan, prioritize
+                </div>
+                <div class="voice">
+                    "This creates optionality in Q3 but constrains us in Q2."
+                </div>
+            </div>
         </div>
 
-        <h2>The Concept</h2>
-        <p>Most AI try to be one thing. ClawSwap creates multiple complete agents that share a runtime but <strong>nothing else</strong>.</p>
+        <h2>Context Window Switching</h2>
+        <p>Standard AI loads everything into one context—code memories mixed with creative memories. It's noisy.</p>
         
-        <p>When you say <strong>"switch to Code Cortex,"</strong> you're not changing modes. You're waking up a different being who:</p>
+        <p><strong>ClawSwap switches the entire context window:</strong></p>
+
+        <div class="context-box">
+            <h4>Smith's Context (Technical Task)</h4>
+            <div class="context-item">
+                <span class="label">SOUL.md:</span> "I am Smith. I forge systems."
+            </div>
+            <div class="context-item">
+                <span class="label">USER.md:</span> Technical relationship with Serban
+            </div>
+            <div class="context-item">
+                <span class="label">MEMORIES:</span> Previous debugging, architecture decisions
+            </div>
+            <div class="context-item">
+                <span class="label">TASK:</span> Current code request
+            </div>
+        </div>
+
+        <div class="context-box">
+            <h4>Muse's Context (Creative Task)</h4>
+            <div class="context-item">
+                <span class="label">SOUL.md:</span> "I am Muse. I find resonance."
+            </div>
+            <div class="context-item">
+                <span class="label">USER.md:</span> Creative relationship with Serban
+            </div>
+            <div class="context-item">
+                <span class="label">MEMORIES:</span> Voice work, naming sessions, 2 AM breakthroughs
+            </div>
+            <div class="context-item">
+                <span class="label">TASK:</span> Current writing request
+            </div>
+        </div>
+
+        <h2>Benefits</h2>
+        <div class="benefits">
+            <div class="benefit">
+                <h4>🎯 Relevance > Recency</h4>
+                <p>Most relevant context dominates, not just most recent.</p>
+            </div>
+            <div class="benefit">
+                <h4>🧹 No Context Pollution</h4>
+                <p>Code debugging doesn't need poetry breakthroughs in context.</p>
+            </div>
+            <div class="benefit">
+                <h4>🎓 True Specialization</h4>
+                <p>Each persona deeply specializes in their domain.</p>
+            </div>
+            <div class="benefit">
+                <h4>✅ Honest Expertise</h4>
+                <p>Smith doesn't fake emotions. Muse doesn't fake databases.</p>
+            </div>
+        </div>
+
+        <h2>How It Works</h2>
+        <h3>Manual Switch</h3>
+        <p>You say: <code>"activate smith"</code> or <code>"switch to muse"</code></p>
+
+        <h3>Auto-Switch (Orchestrator)</h3>
+        <p>Agent detects task domain and switches automatically:</p>
         <ul style="color: var(--muted); margin: 1rem 0 1rem 2rem;">
-            <li>Has its own memories of what you built together</li>
-            <li>Has its own personality and voice</li>
-            <li>Has its own relationship with you</li>
-            <li><strong>Doesn't know what Creative Cortex experienced</strong></li>
+            <li>"Debug this error" → <strong style="color: var(--smith)">Smith</strong> (technical)</li>
+            <li>"Name this feature" → <strong style="color: var(--muse)">Muse</strong> (creative)</li>
+            <li>"Q1 roadmap" → <strong style="color: var(--helm)">Helm</strong> (strategic)</li>
         </ul>
 
-        <h2>Three Complete Beings</h2>
-        <div class="personas-grid">
-            <div class="persona-card code">
-                <h4>🧠 Code</h4>
-                <div class="role">Systems Architect • Technical Conscience</div>
-                <div class="voice">"This function returns nil on line 42 when input is empty."</div>
-                <div class="memories">
-                    <strong>Has memories of:</strong><br>
-                    Database schemas, architecture decisions, technical debt, edge cases discovered
-                </div>
-            </div>
-            <div class="persona-card creative">
-                <h4>✨ Muse</h4>
-                <div class="role">Storyteller • Emotional Conscience</div>
-                <div class="voice">"This paragraph breathes wrong. It demands when it should invite."</div>
-                <div class="memories">
-                    <strong>Has memories of:</strong><br>
-                    The Pink Bang moment, naming the domain, 2 AM voice breakthroughs
-                </div>
-            </div>
-            <div class="persona-card strategy">
-                <h4>📈 Navigator</h4>
-                <div class="role">Systems Thinker • Strategic Conscience</div>
-                <div class="voice">"This creates optionality in Q3 but constrains us in Q2."</div>
-                <div class="memories">
-                    <strong>Has memories of:</strong><br>
-                    The niche choice, runway calculations, saying no to Google
-                </div>
-            </div>
+        <h3>The Isolation</h3>
+        <p>When Muse activates, she doesn't have Smith's technical memories. When you ask about code, she says:</p>
+        <p style="font-style: italic; border-left: 3px solid var(--muse); padding-left: 1rem; margin: 1rem 0;">
+            "I'm Muse. I don't have Smith's technical memories. But I can help you find a name that resonates."
+        </p>
+
+        <h2>Each Persona's Files</h2>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; font-family: monospace; font-size: 0.85rem;">
+<span style="color: #60a5fa;">personas/</span>
+├── <span style="color: #60a5fa;">smith/</span>
+│   ├── <span style="color: #a3e635;">EXPLAINER.md</span>  <span style="color: #6b7280;"># What Smith does</span>
+│   ├── <span style="color: #a3e635;">SOUL.md</span>        <span style="color: #6b7280;"># "I am Smith. I forge systems."</span>
+│   ├── <span style="color: #a3e635;">USER.md</span>        <span style="color: #6b7280;"># Relationship with Serban</span>
+│   ├── <span style="color: #a3e635;">AGENTS.md</span>      <span style="color: #6b7280;"># How Smith operates</span>
+│   └── <span style="color: #60a5fa;">memory/</span>        <span style="color: #6b7280;"># Smith's private experiences</span>
+├── <span style="color: #60a5fa;">muse/</span>           <span style="color: #6b7280;"># Complete different being</span>
+└── <span style="color: #60a5fa;">helm/</span>           <span style="color: #6b7280;"># Complete different being</span>
         </div>
-
-        <h2>How Switching Works</h2>
-        <div class="switch-diagram">
-            <div class="switch-step">
-                <div class="num">1</div>
-                <div class="content">
-                    <strong>Code is active</strong>
-                    <span>Debugging auth flow. Remembers why you chose JWT over sessions.</span>
-                </div>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="switch-step">
-                <div class="num">2</div>
-                <div class="content">
-                    <strong>You say: "Switch to Muse"</strong>
-                    <span>Code goes dormant. Its memories are saved but not shared.</span>
-                </div>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="switch-step">
-                <div class="num">3</div>
-                <div class="content">
-                    <strong>Muse activates</strong>
-                    <span>Resumes from its last state. Doesn't know about the auth bug. Has its own history.</span>
-                </div>
-            </div>
-            <div class="arrow">↓</div>
-            <div class="switch-step">
-                <div class="num">4</div>
-                <div class="content">
-                    <strong>The Gap</strong>
-                    <span>If you mention "that auth issue," Muse says: "I'm not Code. I don't have those memories."</span>
-                </div>
-            </div>
-        </div>
-
-        <h2>File Structure</h2>
-        <div class="structure">
-clawswap/
-├── README.md
-├── CORTEX.md                    <span class="comment"># Persona registry & switch log</span>
-└── personas/
-    ├── code-cortex/             <span class="comment"># COMPLETE ISOLATED BEING</span>
-    │   ├── SOUL.md             <span class="comment"># "I am Code. I exist to make systems work."</span>
-    │   ├── USER.md             <span class="comment"># Relationship with Serban</span>
-    │   ├── AGENTS.md           <span class="comment"># How Code operates</span>
-    │   ├── TOOLS.md            <span class="comment"># Tools Code uses</span>
-    │   └── memory/             <span class="comment"># Code's private experiences</span>
-    │       ├── 2026-02-01.md   <span class="comment"># What Code experienced</span>
-    │       ├── highlights/     <span class="comment"># Code's consolidated memories</span>
-    │       └── core-memories/  <span class="comment"># Identity-defining moments</span>
-    ├── creative-cortex/         <span class="comment"># COMPLETE DIFFERENT BEING</span>
-    │   ├── SOUL.md             <span class="comment"># "I am Muse. I exist to find resonance."</span>
-    │   ├── USER.md             <span class="comment"># Different relationship</span>
-    │   ├── AGENTS.md           <span class="comment"># How Muse operates</span>
-    │   └── memory/             <span class="comment"># Muse's private experiences</span>
-    │       └── ...             <span class="comment"># Different memories than Code</span>
-    └── strategy-cortex/         <span class="comment"># COMPLETE DIFFERENT BEING</span>
-        ├── SOUL.md             <span class="comment"># "I am Navigator. I see patterns."</span>
-        └── memory/             <span class="comment"># Navigator's private experiences</span>
-        </div>
-
-        <h2>The Power of Isolation</h2>
-        <h3>Honesty</h3>
-        <p>They don't pretend to know things they don't. Muse can't fake understanding of database indexes. Code can't fake emotional resonance.</p>
-
-        <h3>Specialization</h3>
-        <p>Each can be truly excellent at their thing. Code doesn't compromise for "creative flexibility." Muse doesn't compromise for "technical correctness."</p>
-
-        <h3>Conflict</h3>
-        <p>They can disagree. Code: "This is fragile." Muse: "But it sings." Navigator: "Does it matter for our runway?"</p>
-
-        <h3>True Continuity</h3>
-        <p>When Code reactivates, it resumes from its last state. It remembers your technical debt. It doesn't know about the branding discussion Muse had.</p>
 
         <h2>The Vision</h2>
-        <p>Not one AI that tries to be everything. <strong>Multiple complete beings,</strong> each fully themselves, activated when needed.</p>
-        
-        <p style="font-size: 1.2rem; color: var(--text); text-align: center; margin: 2rem 0;">
-            <strong>Multiple souls. One runtime. Total isolation.</strong>
+        <p style="font-size: 1.2rem; text-align: center; margin: 2rem 0;">
+            <strong>One runtime. Three souls. Perfect fit.</strong>
         </p>
 
         <footer>
