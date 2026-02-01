@@ -82,6 +82,21 @@ rm -rf ~/.openclaw/workspace/personas/smith  # Don't need Smith? Delete him.
 
 Create your own: `clawswap create-persona my-persona`
 
+## Export Your Default Bot
+
+Save your current agent as a persona to share or preserve:
+
+```bash
+python3 skill/scripts/export_default_bot.py my-default
+# Creates personas/my-default/ from your SOUL.md, USER.md, memory/
+
+# Share it:
+tar czf my-default.tar.gz ~/.openclaw/workspace/personas/my-default/
+
+# Someone else imports it:
+tar xzf my-default.tar.gz -C ~/.openclaw/workspace/personas/
+```
+
 ## Uninstall
 
 ```bash

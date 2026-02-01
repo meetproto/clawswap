@@ -65,6 +65,7 @@ personas/
 | `switch_persona.py [name]` | Switch to persona |
 | `list_personas.py` | List available personas |
 | `validate_persona.py [name]` | Check persona structure |
+| `export_default_bot.py [name]` | Save your default agent as a persona |
 
 ## Example Personas
 

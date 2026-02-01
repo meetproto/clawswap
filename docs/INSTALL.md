@@ -172,21 +172,32 @@ personas/[name]/
 
 ---
 
-## Migration (If You Want to Become a Persona)
+## Export Your Default Bot
 
-If you decide YOUR identity should become one of the personas:
+Save your current/default agent as a shareable persona:
 
 ```bash
-# Copy your current self to a persona
-clawswap promote-to-persona [name]
+python3 skill/scripts/export_default_bot.py my-identity
 ```
 
-This copies:
-- Your `SOUL.md` → `personas/[name]/SOUL.md`
-- Your `USER.md` → `personas/[name]/USER.md`
-- Your `memory/` → `personas/[name]/memory/`
+This creates:
+- `personas/my-identity/SOUL.md` — Your identity
+- `personas/my-identity/USER.md` — Your relationships
+- `personas/my-identity/memory/` — Your memories
 
-Then you can create a NEW default SOUL.md for your base identity.
+**Share it:**
+```bash
+cd ~/.openclaw/workspace/personas/
+tar czf my-identity.tar.gz my-identity/
+# Share the .tar.gz file
+```
+
+**Import someone else's:**
+```bash
+cd ~/.openclaw/workspace/personas/
+tar xzf their-identity.tar.gz
+# Now: activate their-identity
+```
 
 ---
 
