@@ -1,6 +1,6 @@
 ---
 name: clawswap
-description: Switch between fully isolated AI personas (Smith the Builder, Muse the Artist, Helm the Navigator, or custom). Each persona has its own complete memory system, identity (SOUL.md), relationship (USER.md), and operational rules (AGENTS.md). Use when user says "switch to [persona]", "activate [persona]", "become [persona]", mentions Smith/Muse/Helm, or when task context suggests a different expertise (coding -> Smith, writing -> Muse, strategy -> Helm).
+description: Switch between fully isolated AI personas (Smith the Builder, Muse the Artist, Helm the Navigator, or custom). Each persona has its own complete memory system, identity (SOUL.md), relationship (USER.md), and operational rules (AGENTS.md). Use when user says "switch to [persona]", "activate [persona]", "become [persona]", mentions Smith/Muse/Helm, or when task context suggests a different expertise (coding to Smith, writing to Muse, strategy to Helm).
 ---
 
 # ClawSwap Skill
