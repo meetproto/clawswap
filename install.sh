@@ -48,11 +48,31 @@ if command -v curl &> /dev/null; then
     }
 fi
 
+# Find OpenClaw skills directory
+SKILLS_DIR=""
+if [ -d "/usr/local/lib/node_modules/openclaw/skills" ]; then
+    SKILLS_DIR="/usr/local/lib/node_modules/openclaw/skills"
+elif [ -d "/opt/openclaw/skills" ]; then
+    SKILLS_DIR="/opt/openclaw/skills"
+elif [ -d "$HOME/.npm-global/lib/node_modules/openclaw/skills" ]; then
+    SKILLS_DIR="$HOME/.npm-global/lib/node_modules/openclaw/skills"
+fi
+
 # Install skill if we have a .skill file
-if [ -f "clawswap-skill.skill" ]; then
-    echo "📦 Installing skill..."
-    mkdir -p "$WORKSPACE/.skills"
-    cp "clawswap-skill.skill" "$WORKSPACE/.skills/"
+if [ -f "clawswap-skill.skill" ] && [ -n "$SKILLS_DIR" ]; then
+    echo "📦 Installing skill to OpenClaw..."
+    if [ -w "$SKILLS_DIR" ]; then
+        cp "clawswap-skill.skill" "$SKILLS_DIR/"
+        echo "✅ Skill installed to: $SKILLS_DIR"
+    else
+        echo "⚠️  Need sudo to install skill to: $SKILLS_DIR"
+        sudo cp "clawswap-skill.skill" "$SKILLS_DIR/"
+        echo "✅ Skill installed"
+    fi
+else
+    echo "⚠️  Could not find OpenClaw skills directory"
+    echo "   Skill file saved to: $TEMP_DIR/clawswap-skill.skill"
+    echo "   Install manually: sudo cp clawswap-skill.skill /usr/local/lib/node_modules/openclaw/skills/"
 fi
 
 # Copy personas to workspace
@@ -81,6 +101,12 @@ rm -rf "$TEMP_DIR"
 
 echo ""
 echo "✅ ClawSwap installed!"
+echo ""
+if [ -n "$SKILLS_DIR" ] && [ -f "$SKILLS_DIR/clawswap-skill.skill" ]; then
+    echo "Skill location: $SKILLS_DIR/clawswap-skill.skill"
+    echo "Should appear in: /clawd list-skills"
+fi
+echo "Personas location: $WORKSPACE/personas/"
 echo ""
 echo "Quick start:"
 echo "  activate smith     # Switch to Smith (Builder)"

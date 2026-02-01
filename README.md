@@ -29,23 +29,30 @@ Your original agent files stay untouched.
 
 ## Installation
 
-### One-Liner
+### Option 1: OpenClaw Dashboard (when published)
+```bash
+/clawd install clawswap
+# Then: cp -r personas/ ~/.openclaw/workspace/
+```
+
+### Option 2: One-Liner (now)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/meetproto/clawswap/main/install.sh | bash
 ```
 
-### Manual
+### Option 3: Manual
 ```bash
-# 1. Download skill
-curl -fsSL https://github.com/meetproto/clawswap/releases/latest/download/clawswap-skill.skill -o ~/.openclaw/workspace/.skills/clawswap-skill.skill
+# 1. Install skill to OpenClaw
+sudo cp clawswap-skill.skill /usr/local/lib/node_modules/openclaw/skills/
 
-# 2. Copy personas
+# 2. Copy personas to workspace
 cp -r personas/ ~/.openclaw/workspace/
 
-# 3. Done
+# 3. Verify
+ls /usr/local/lib/node_modules/openclaw/skills/ | grep clawswap
 ```
 
-See [docs/INSTALL.md](docs/INSTALL.md) for detailed setup and safety info.
+See [docs/INSTALL.md](docs/INSTALL.md) for detailed setup.
 
 ## Usage
 

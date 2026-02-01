@@ -61,9 +61,27 @@ When you say "deactivate" or "switch back":
 ## Installation Steps
 
 ### 1. Install Skill
+
+**Option A: OpenClaw Dashboard (when published)**
 ```bash
+# Skill will appear in dashboard after ClawdHub approval
 /clawd install clawswap
-# or manually copy to skills directory
+```
+
+**Option B: Manual Install (now)**
+```bash
+# Copy skill to OpenClaw skills directory
+sudo cp clawswap-skill.skill /usr/local/lib/node_modules/openclaw/skills/
+
+# Or user-local install
+mkdir -p ~/.openclaw/skills
+cp clawswap-skill.skill ~/.openclaw/skills/
+```
+
+**Verify installation:**
+```bash
+# Should show 'clawswap' in the list
+ls /usr/local/lib/node_modules/openclaw/skills/ | grep clawswap
 ```
 
 ### 2. Initialize Personas
