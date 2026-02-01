@@ -1,38 +1,44 @@
 #!/usr/bin/env python3
 """
 ClawSwap: Switch between fully isolated AI personas.
-Logs the switch in CORTEX.md and outputs persona summary.
+Personas live in personas/[name]/ — separate from your main memory.
 """
 
 import sys
 import os
-import json
 from datetime import datetime
 from pathlib import Path
 
-def get_clawswap_root():
-    """Find clawswap root directory."""
-    # Check if we're in a standard location
+def get_workspace_root():
+    """Find OpenClaw workspace root."""
+    # Check common locations
     possible_paths = [
-        Path.home() / ".openclaw" / "workspace" / "clawswap",
-        Path.cwd() / "clawswap",
-        Path.cwd().parent / "clawswap",
-        Path("/tmp/clawswap"),
+        Path.home() / ".openclaw" / "workspace",
+        Path.cwd(),
+        Path.cwd().parent,
     ]
     
     for path in possible_paths:
-        if path.exists() and (path / "CORTEX.md").exists():
+        if (path / "SOUL.md").exists() or (path / "memory").exists():
             return path
     
-    # Default to current directory if CORTEX.md exists
-    if (Path.cwd() / "CORTEX.md").exists():
-        return Path.cwd()
-    
-    return None
+    return Path.cwd()
 
-def list_personas(root_path):
+def get_personas_dir():
+    """Get personas directory (creates if needed)."""
+    workspace = get_workspace_root()
+    personas_dir = workspace / "personas"
+    
+    if not personas_dir.exists():
+        print(f"Creating personas directory: {personas_dir}")
+        personas_dir.mkdir(parents=True)
+    
+    return personas_dir
+
+def list_personas():
     """List all available personas."""
-    personas_dir = root_path / "personas"
+    personas_dir = get_personas_dir()
+    
     if not personas_dir.exists():
         return []
     
@@ -43,14 +49,15 @@ def list_personas(root_path):
     
     return sorted(personas)
 
-def validate_persona(root_path, persona_name):
+def validate_persona(persona_name):
     """Check if persona has all required files."""
-    persona_path = root_path / "personas" / persona_name
+    personas_dir = get_personas_dir()
+    persona_path = personas_dir / persona_name
     
     if not persona_path.exists():
-        return False, f"Persona '{persona_name}' not found"
+        return False, f"Persona '{persona_name}' not found in {personas_dir}"
     
-    required_files = ["SOUL.md", "USER.md", "AGENTS.md"]
+    required_files = ["SOUL.md", "USER.md"]
     missing = []
     
     for file in required_files:
@@ -62,9 +69,10 @@ def validate_persona(root_path, persona_name):
     
     return True, "Valid"
 
-def get_persona_summary(root_path, persona_name):
+def get_persona_summary(persona_name):
     """Extract key info from SOUL.md."""
-    soul_path = root_path / "personas" / persona_name / "SOUL.md"
+    personas_dir = get_personas_dir()
+    soul_path = personas_dir / persona_name / "SOUL.md"
     
     if not soul_path.exists():
         return None
@@ -72,77 +80,42 @@ def get_persona_summary(root_path, persona_name):
     content = soul_path.read_text()
     lines = content.split('\n')
     
-    # Extract identity line (usually after "## Identity" or first "I am")
     identity = "Unknown"
     for line in lines:
-        if line.strip().startswith("I am "):
+        if line.strip().startswith("I am ") or line.strip().startswith("I'm "):
             identity = line.strip()
             break
     
-    # Extract specialty from "What Matters" or similar
-    specialty = "General"
-    for i, line in enumerate(lines):
-        if "## What Matters" in line or "## Specialty" in line:
-            if i + 1 < len(lines):
-                specialty = lines[i + 1].strip().strip('- ')
-                break
-    
     return {
         "name": persona_name,
-        "identity": identity,
-        "specialty": specialty
+        "identity": identity
     }
-
-def update_cortex_log(root_path, from_persona, to_persona):
-    """Update CORTEX.md with switch log entry."""
-    cortex_path = root_path / "CORTEX.md"
-    
-    if not cortex_path.exists():
-        return False
-    
-    content = cortex_path.read_text()
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
-    
-    # Find the switch log section
-    log_entry = f"| {timestamp} | {from_persona or '—'} | {to_persona} | Manual switch | — |\n"
-    
-    # Simple append for now - in production would parse and insert properly
-    # For this example, we just print what would happen
-    print(f"[LOG] Would add to CORTEX.md: {log_entry.strip()}")
-    return True
 
 def main():
     if len(sys.argv) < 2:
         print("Usage: switch_persona.py <persona-name>")
         print("\nAvailable personas:")
-        root = get_clawswap_root()
-        if root:
-            for p in list_personas(root):
-                print(f"  - {p}")
+        for p in list_personas():
+            print(f"  - {p}")
+        
+        print(f"\nPersonas directory: {get_personas_dir()}")
+        print("\nTo create a new persona:")
+        print("  clawswap create-persona <name>")
         sys.exit(1)
     
     persona_name = sys.argv[1]
     
-    # Find clawswap root
-    root_path = get_clawswap_root()
-    if not root_path:
-        print("Error: Could not find clawswap root directory")
-        sys.exit(1)
-    
     # Validate persona exists
-    valid, msg = validate_persona(root_path, persona_name)
+    valid, msg = validate_persona(persona_name)
     if not valid:
         print(f"Error: {msg}")
         print(f"\nAvailable personas:")
-        for p in list_personas(root_path):
+        for p in list_personas():
             print(f"  - {p}")
         sys.exit(1)
     
     # Get persona summary
-    summary = get_persona_summary(root_path, persona_name)
-    
-    # Update CORTEX.md
-    update_cortex_log(root_path, None, persona_name)
+    summary = get_persona_summary(persona_name)
     
     # Output activation info
     print(f"\n{'='*50}")
@@ -150,13 +123,11 @@ def main():
     print(f"{'='*50}")
     if summary:
         print(f"\nIdentity: {summary['identity']}")
-        print(f"Specialty: {summary['specialty']}")
-    print(f"\nLoaded from: {root_path / 'personas' / persona_name}")
-    print(f"\nNext steps:")
-    print(f"  1. Read SOUL.md — understand who you are")
-    print(f"  2. Read USER.md — understand your relationship")
-    print(f"  3. Read AGENTS.md — understand how to operate")
-    print(f"  4. Check recent memories in memory/")
+    
+    personas_dir = get_personas_dir()
+    print(f"\nLoaded from: {personas_dir / persona_name}")
+    print(f"\nYour original memory is safe at: {get_workspace_root() / 'memory'}")
+    print(f"\nThis persona writes to: {personas_dir / persona_name / 'memory'}")
     print(f"\nRemember: You do NOT have access to other personas' memories.")
     print(f"{'='*50}\n")
 

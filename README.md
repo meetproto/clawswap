@@ -70,29 +70,71 @@ Your OpenClaw Agent
 
 ---
 
-## Installation
+## Installation (Safe - Won't Touch Your Memory)
 
-### Option 1: Install from ClawdHub (Coming Soon)
+ClawSwap creates personas **alongside** your existing memory, not inside it.
+
+### Your Memory Stays Safe
+```
+~/.openclaw/workspace/
+├── SOUL.md              # ← Your original (untouched)
+├── USER.md              # ← Your original (untouched)
+├── memory/              # ← Your original (untouched)
+│
+└── personas/            # ← NEW: ClawSwap creates this
+    ├── smith/
+    ├── muse/
+    └── helm/
+```
+
+### Option 1: Install from ClawdHub
 ```
 /clawd install clawswap
+clawswap init              # Creates personas/ directory
 ```
 
 ### Option 2: Manual Install
-1. Download `clawswap-skill.skill` from this repo
-2. Place in your OpenClaw skills directory
-3. Restart OpenClaw
+```bash
+# 1. Download skill
+cp clawswap-skill.skill ~/.openclaw/skills/
 
-### Option 3: Use the Scripts Directly
-The `skill/scripts/` folder contains standalone Python scripts:
-- `switch_persona.py [name]` — Switch to a persona
-- `list_personas.py` — List available personas  
-- `validate_persona.py [name]` — Check persona structure
+# 2. Initialize personas (safe - won't touch your memory)
+python3 skill/scripts/init_clawswap.py
+```
+
+### Option 3: Use Scripts Directly
+```bash
+# Switch persona
+python3 skill/scripts/switch_persona.py smith
+
+# List personas
+python3 skill/scripts/list_personas.py
+
+# Validate structure
+python3 skill/scripts/validate_persona.py smith
+```
 
 ---
 
-## Website
+## Uninstallation (Clean Removal)
 
-Full website coming soon. This repo currently contains the core system and skill files only.
+```bash
+# Remove skill
+/clawd uninstall clawswap
+
+# Remove personas (your original memory stays)
+rm -rf ~/.openclaw/workspace/personas/
+```
+
+**Result:** You're back to exactly where you started. Your SOUL.md, USER.md, and memory/ are unchanged.
+
+---
+
+## Full Documentation
+
+- [INSTALL.md](INSTALL.md) — Detailed installation & safety guide
+- [ORCHESTRATOR.md](ORCHESTRATOR.md) — Auto-switching concept
+- [skill/SKILL.md](skill/SKILL.md) — Skill reference for developers
 
 ---
 
