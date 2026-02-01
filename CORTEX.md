@@ -12,11 +12,21 @@
 
 ## Available Personas
 
-| Persona | Directory | Specialty | First Activated |
-|---------|-----------|-----------|-----------------|
-| code-cortex | `personas/code-cortex/` | Technical precision | Never |
-| creative-cortex | `personas/creative-cortex/` | Storytelling & design | Never |
-| strategy-cortex | `personas/strategy-cortex/` | Business & systems | Never |
+| Persona | Name | Directory | Specialty | Trigger Words |
+|---------|------|-----------|-----------|---------------|
+| 🔧 Smith | The Builder | `personas/smith/` | Technical systems, code | code, debug, error, architecture |
+| 🎨 Muse | The Artist | `personas/muse/` | Writing, brand, design | write, name, brand, design, feel |
+| 🧭 Helm | The Navigator | `personas/helm/` | Strategy, planning | roadmap, strategy, plan, prioritize |
+
+---
+
+## Auto-Switching (Orchestrator)
+
+The agent can automatically switch based on task context. See [ORCHESTRATOR.md](ORCHESTRATOR.md) for details.
+
+**Default behavior:** Manual switching (user says "activate smith")
+
+**Auto mode:** Agent detects domain and switches automatically
 
 ---
 
@@ -24,35 +34,35 @@
 
 | Time | From | To | Trigger | Notes |
 |------|------|-----|---------|-------|
-| 09:00 | — | code-cortex | "Need to architect this" | Started auth system |
-| 11:30 | code-cortex | creative-cortex | "Write the announcement" | No memory of auth code |
-| 14:00 | creative-cortex | strategy-cortex | "Q1 planning" | Different perspective on roadmap |
-| 16:00 | strategy-cortex | code-cortex | "Back to implementation" | Remembers auth system from morning |
+| 09:00 | — | smith | "Need to architect this" | Auth system design |
+| 11:30 | smith | muse | "Write the announcement" | Feature naming |
+| 14:00 | muse | helm | "Q1 planning" | Roadmap discussion |
+| 16:00 | helm | smith | "Back to implementation" | Resumed coding |
 
 ---
 
-## Important: Isolation Rules
+## Isolation Reminder
 
 Each persona CANNOT access:
 - Other personas' memory/ folders
 - Other personas' SOUL.md or USER.md
-- Other personas' daily experiences
+- What happened while other personas were active
 
 They ONLY have:
 - Their own complete memory system
 - Their own identity files
-- The shared CORTEX.md (this file, for switching)
+- This shared CORTEX.md (switch log only)
 
 ---
 
-## Reactivation
+## Persona Files
 
-When a persona is reactivated, they resume from their last state:
-- Their last memories
-- Their last relationship with you
-- Their accumulated core memories
-
-Like waking up from a nap. They don't know what happened while they were "asleep."
+Each persona folder contains:
+- `EXPLAINER.md` — What this persona does, when to use
+- `SOUL.md` — Identity, values, voice
+- `USER.md` — Relationship with Serban
+- `AGENTS.md` — Operating procedures
+- `memory/` — Private experiences (isolated)
 
 ---
 

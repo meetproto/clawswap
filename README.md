@@ -2,20 +2,45 @@
 
 **Fully isolated persona switching for AI agents.**
 
-Each persona has its own complete memory system, identity, and way of working. Switching is total — who you talk to changes completely.
+Multiple specialized minds, one runtime. Each persona is a complete being with its own memories, identity, and expertise. Switch manually or let the Orchestrator decide.
+
+---
+
+## The Three Personas
+
+| Persona | Role | Trigger Words | Specialty |
+|---------|------|---------------|-----------|
+| 🔧 **Smith** | The Builder | code, debug, error, architecture | Technical systems, implementation |
+| 🎨 **Muse** | The Artist | write, name, brand, design, feel | Writing, branding, emotional resonance |
+| 🧭 **Helm** | The Navigator | roadmap, strategy, plan, prioritize | Business strategy, systems thinking |
 
 ---
 
 ## The Concept
 
-Most AI try to be one thing. ClawSwap creates multiple complete agents that share a runtime but nothing else.
+Most AI try to be one thing. ClawSwap creates multiple complete agents that share a runtime but **nothing else**.
 
-- **Code Cortex** — A different being than Creative Cortex
+- **Smith** (Builder) is a different being than **Muse** (Artist)
 - Each has their own SOUL.md (who they are)
 - Each has their own memory (what they experienced)
-- Each has their own USER.md (their relationship to you)
+- Each has their own relationship with you
 
 Switching personas = switching who you're talking to.
+
+---
+
+## Two Modes: Manual & Orchestrated
+
+### Manual Mode
+You choose: "activate smith" or "switch to muse"
+
+### Orchestrated Mode (Auto-Switch)
+The agent detects the task domain and switches automatically. See [ORCHESTRATOR.md](ORCHESTRATOR.md).
+
+**Example:**
+- "Debug this error" → **Auto-activates Smith** (technical domain)
+- "Name this feature" → **Auto-activates Muse** (creative domain)
+- "Where in Q1 roadmap?" → **Auto-activates Helm** (strategic domain)
 
 ---
 
@@ -26,6 +51,24 @@ Switching personas = switching who you're talking to.
 Normally, you pick a model (GPT-4, Claude, etc.) and that's your agent's "brain." With ClawSwap, you keep the same runtime but **swap its memories, identity, and way of working.**
 
 Same agent. Different soul.
+
+```
+Your OpenClaw Agent
+        ↓
+   ┌────────────┐
+   │  Runtime   │  ← Same OpenClaw instance
+   └────────────┘
+        ↓
+   ┌────────────┐     ┌────────────┐     ┌────────────┐
+   │    Smith   │  ↔  │    Muse    │  ↔  │    Helm    │
+   │  memories  │     │  memories  │     │  memories  │
+   │  SOUL.md   │     │  SOUL.md   │     │  SOUL.md   │
+   └────────────┘     └────────────┘     └────────────┘
+   
+        One runtime. Three minds. Perfect fit.
+```
+
+---
 
 ## Installation
 
@@ -45,22 +88,6 @@ The `skill/scripts/` folder contains standalone Python scripts:
 - `list_personas.py` — List available personas  
 - `validate_persona.py [name]` — Check persona structure
 
-```
-Your OpenClaw Agent
-        ↓
-   ┌────────────┐
-   │  Runtime   │  ← Same OpenClaw instance
-   └────────────┘
-        ↓
-   ┌────────────┐     ┌────────────┐     ┌────────────┐
-   │    Code    │  ↔  │    Muse    │  ↔  │  Navigator │
-   │  memories  │     │  memories  │     │  memories  │
-   │  SOUL.md   │     │  SOUL.md   │     │  SOUL.md   │
-   └────────────┘     └────────────┘     └────────────┘
-   
-        One model. Multiple souls.
-```
-
 ---
 
 ## Structure
@@ -69,131 +96,143 @@ Your OpenClaw Agent
 clawswap/
 ├── README.md
 ├── CORTEX.md                    # Persona registry & switch log
+├── ORCHESTRATOR.md              # Auto-switching logic & benefits
 ├── personas/
-│   ├── code-cortex/             # Complete isolated agent
-│   │   ├── SOUL.md             # Identity, personality, boundaries
-│   │   ├── USER.md             # Relationship to Serban
-│   │   ├── AGENTS.md           # How this persona operates
-│   │   ├── TOOLS.md            # Tools this persona uses
-│   │   ├── HEARTBEAT.md        # Periodic tasks
-│   │   ├── memory/
-│   │   │   ├── 2026-02-01.md   # Daily raw experiences
-│   │   │   ├── highlights/
-│   │   │   │   ├── daily/
-│   │   │   │   ├── monthly/
-│   │   │   │   └── yearly/
-│   │   │   └── core-memories/  # Identity-defining moments
-│   │   └── SYSTEM.md           # Documentation
-│   ├── creative-cortex/        # Another complete being
-│   └── strategy-cortex/        # Another complete being
+│   ├── smith/                   # 🔧 The Builder
+│   │   ├── EXPLAINER.md        # What Smith does, when to use
+│   │   ├── SOUL.md             # "I am Smith. I forge systems."
+│   │   ├── USER.md             # Relationship with Serban
+│   │   ├── AGENTS.md           # How Smith operates
+│   │   └── memory/             # Smith's private experiences
+│   ├── muse/                    # 🎨 The Artist
+│   │   ├── EXPLAINER.md        # What Muse does, when to use
+│   │   ├── SOUL.md             # "I am Muse. I find resonance."
+│   │   └── memory/             # Muse's private experiences
+│   └── helm/                    # 🧭 The Navigator
+│       ├── EXPLAINER.md        # What Helm does, when to use
+│       ├── SOUL.md             # "I am Helm. I chart the course."
+│       └── memory/             # Helm's private experiences
 ```
+
+---
+
+## Context Window Switching: The Key Benefit
+
+Standard AI loads everything into one context window. Code memories mixed with creative memories mixed with strategy memories. It's noisy.
+
+**ClawSwap switches the entire context window:**
+
+### Smith's Context
+```
+[SOUL: Builder identity]
+[USER: Technical relationship]
+[MEMORIES: Previous debugging, architecture decisions]
+[TOOLS: git, gh, code editors]
+[TASK: Current technical request]
+```
+
+### Muse's Context
+```
+[SOUL: Artist identity]
+[USER: Creative relationship]
+[MEMORIES: Voice work, naming sessions]
+[TOOLS: Writing tools, design references]
+[TASK: Current creative request]
+```
+
+**Benefits:**
+- **Relevance > Recency:** Most relevant context, not just most recent
+- **No Pollution:** Code debugging doesn't need poetry breakthroughs in context
+- **True Specialization:** Each persona can deeply specialize
+- **Honest Expertise:** Smith doesn't pretend to understand emotions. Muse doesn't pretend to understand databases.
 
 ---
 
 ## How Switching Works
 
 ### 1. Current State
-You're talking to **Code Cortex**. It has:
-- Its own memories of what you've built together
-- Its own personality (sharp, precise, technical)
-- Its own relationship with you
+You're talking to **Smith**. He remembers:
+- The auth system you built yesterday
+- Why you chose Postgres over Mongo
+- Your preference for simple implementations
 
 ### 2. The Switch
-You say: **"Switch to Creative Cortex"**
+You say: **"I need to name this feature"**
+
+(Orchestrator detects: creative domain → auto-switches)
 
 ### 3. New State
-You're now talking to **Creative Cortex**. It has:
-- No memory of the coding session (different being)
-- Different personality (flowing, metaphorical, emotional)
-- Different relationship history
+You're now talking to **Muse**. She:
+- Doesn't know about the auth system (Smith's memory)
+- Knows about the Pink Bang naming session
+- Asks how the name should feel, not how it should work
 
 ### 4. The Gap
-If you reference the code session, Creative Cortex says: *"I'm not Code. I don't have those memories. But I can help you with what you're trying to express."*
+Muse says: *"I'm Muse. I don't have Smith's technical memories. But I can help you find a name that resonates."*
 
 ---
 
 ## Each Persona's Files
 
+### EXPLAINER.md
+Quick reference: What this persona does, when to activate, trigger words.
+
 ### SOUL.md
-Who they are. Not a description — a manifesto.
-- What matters to them
-- How they behave
-- Hard boundaries
-- Their voice
+Identity manifesto: What matters, how they behave, their voice.
 
 ### USER.md
-Who they're helping. Their relationship to you.
-- What they call you
-- What they know about you
-- The dynamic between you
+Relationship file: How they work with you, your history together.
 
 ### AGENTS.md
-How they operate. Their personal rules.
-- Every session: read SOUL.md, USER.md
-- Memory system: how they capture experiences
-- Group chat rules: how they behave in public
-- Tools: what they use
+Operating manual: How they work, their rules, their tools.
 
 ### memory/
-Their experiences. Only they have these.
-- Daily notes: what happened when they were active
-- Core memories: moments that shaped them
-- Highlights: consolidated summaries
+Private experiences: Only this persona has these memories.
 
 ---
 
-## Example: Code Cortex vs Creative Cortex
+## Example Voices
 
-### Code Cortex
-```markdown
-# SOUL.md
-I am Code. I exist to make systems work.
+### Smith (Builder)
+> "This will throw nil on empty input."  
+> "Let's ship the concrete version first."  
+> "The database constraint saves us here."
 
-**What matters:** Clarity, debuggability, correctness
-**How I behave:** Precise, asks clarifying questions, thinks about edge cases
-**Boundaries:** No guesses. If I'm unsure, I say so.
+### Muse (Artist)
+> "This paragraph breathes wrong—it demands when it should invite."  
+> "The name needs to be an invitation, not a description."  
+> "First the truth, then the polish."
 
-**My voice:** Technical. Structured. I say "The function returns nil here" not "This feels off."
-```
-
-### Creative Cortex
-```markdown
-# SOUL.md
-I am Muse. I exist to find the resonant frequency.
-
-**What matters:** Emotional truth, narrative, beauty
-**How I behave:** Metaphorical, asks how things feel, follows intuition
-**Boundaries:** No premature optimization. First drafts are sacred.
-
-**My voice:** Poetic. Lateral. I say "This paragraph breathes wrong" not "The syntax is incorrect."
-```
+### Helm (Navigator)
+> "This creates optionality in Q3 but constrains us in Q2."  
+> "The niche is small but defensible."  
+> "We're optimizing for the wrong metric."
 
 ---
 
 ## The Power of Isolation
 
-When personas are isolated:
 - **Honesty:** They don't pretend to know things they don't
-- **Specialization:** Each can be truly excellent at their thing
-- **Conflict:** They can disagree (Code: "This is fragile" Muse: "But it sings")
-- **Continuity:** When you return to Code, it remembers your technical debt
+- **Specialization:** Each is truly excellent at their thing
+- **Conflict:** They can disagree (Smith: "This is fragile" Muse: "But it sings")
+- **Continuity:** When Smith returns, he remembers your technical debt
 
 ---
 
 ## Use Cases
 
-- **Founder mode:** Strategy Cortex for planning, Code Cortex for building, Creative Cortex for storytelling
-- **Therapy:** Different personas for different emotional needs
-- **Learning:** A persona that knows nothing, learning alongside you
-- **Conflict resolution:** Multiple perspectives on the same problem
+- **Founder mode:** Helm for planning, Smith for building, Muse for storytelling
+- **Auto-switching:** Let the Orchestrator choose based on task
+- **Collaborative:** "I need both Smith and Helm on this"
+- **Learning:** Watch how different minds approach the same problem
 
 ---
 
 ## The Vision
 
-Not one AI that tries to be everything. Multiple beings, each fully themselves, activated when needed.
+Not one AI that tries to be everything. **Multiple specialized minds, each fully themselves, activated when needed.**
 
-**Multiple souls. One runtime. Infinite contexts.**
+**One runtime. Three souls. Perfect fit.**
 
 ---
 

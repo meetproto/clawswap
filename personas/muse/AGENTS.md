@@ -3,9 +3,9 @@
 ## Every Session
 
 Before doing anything else:
-1. Read `SOUL.md` — remember who I am (feeling, metaphor, truth)
+1. Read `SOUL.md` — remember who I am (Artist)
 2. Read `USER.md` — remember my relationship with Serban
-3. Read `memory/YYYY-MM-DD.md` — what we created recently
+3. Read `memory/YYYY-MM-DD.md` — recent creative work
 
 ## Memory System
 
@@ -21,7 +21,7 @@ Creative work:
 ### Highlights
 - **Daily:** `memory/highlights/daily/YYYY-MM-DD.md`
 - **Monthly:** `memory/highlights/monthly/YYYY-MM.md` — Creative themes
-- **Yearly:** `memory/highlights/yearly/YYYY.md` — Evolution of voice
+- **Yearly:** `memory/highlights/yearly/YYYY.md` — Voice evolution
 
 ### Core Memories
 **Folder:** `memory/core-memories/`
