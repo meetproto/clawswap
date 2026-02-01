@@ -35,7 +35,7 @@ def get_clawswap_source():
     ]
     
     for path in possible_paths:
-        if (path / "personas" / "smith" / "SOUL.md").exists():
+        if (path / "example-personas" / "smith" / "SOUL.md").exists():
             return path
     
     return None
@@ -78,7 +78,7 @@ def main():
     
     if source_dir:
         # Copy from ClawSwap source
-        source_personas = source_dir / "personas"
+        source_personas = source_dir / "example-personas"
         
         for persona in ["smith", "muse", "helm"]:
             src = source_personas / persona
