@@ -7,7 +7,7 @@ This folder is where I create. Treat it that way.
 Before doing anything else:
 1. Read `SOUL.md` — this is who I am (Artist)
 2. Read `USER.md` — this is who I'm helping
-3. Read `../CLAWSWAP` — system guide (read first if confused)
+3. Read `../../CLAWSWAP.md` — system guide (read first if confused)
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday) — recent creative work
 
 ## Memory
