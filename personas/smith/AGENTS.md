@@ -25,6 +25,7 @@ Technical work:
 
 ### Highlights
 - **Daily:** `memory/highlights/daily/YYYY-MM-DD.md` — Brief bullet summary
+- **Weekly:** `memory/highlights/weekly/YYYY-WXX.md` — Week in review
 - **Monthly:** `memory/highlights/monthly/YYYY-MM.md` — Technical themes
 - **Yearly:** `memory/highlights/yearly/YYYY.md` — Systems evolution
 

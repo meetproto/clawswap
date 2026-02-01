@@ -71,10 +71,23 @@ When you say "deactivate" or "switch back":
 clawswap init
 ```
 
-This copies from `example-personas/` to your workspace:
-- `personas/smith/` — The Builder
-- `personas/muse/` — The Artist
-- `personas/helm/` — The Navigator
+This creates in your workspace:
+- `personas/smith/` — The Builder (example)
+- `personas/muse/` — The Artist (example)
+- `personas/helm/` — The Navigator (example)
+
+**These are examples.** Use them, modify them, or delete them:
+```bash
+# Delete default personas you don't want
+rm -rf ~/.openclaw/workspace/personas/smith
+rm -rf ~/.openclaw/workspace/personas/muse
+rm -rf ~/.openclaw/workspace/personas/helm
+```
+
+**Create your own:**
+```bash
+clawswap create-persona my-persona
+```
 
 ### 3. Your Memory Is Safe
 Your existing files are **never touched**:

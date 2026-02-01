@@ -22,8 +22,8 @@ switch to helm  → Loads Helm's memories, voice, expertise
 
 Each persona has their own:
 - **SOUL.md** — Identity and values
-- **USER.md** — Relationship with you
-- **memory/** — Experiences and history
+- **USER.md** — Relationship with you  
+- **memory/** — Daily, weekly, monthly, yearly highlights + core memories
 
 Your original agent files stay untouched.
 
@@ -60,15 +60,20 @@ activate smith
 
 See [docs/ORCHESTRATOR.md](docs/ORCHESTRATOR.md) for auto-switching details.
 
-## Example Personas
+## Default Personas (Delete What You Don't Need)
 
-This repo includes three fully-developed example personas in `example-personas/`:
+Three example personas included by default:
 
-- `smith/` — Battle-scarred engineer with production war stories
-- `muse/` — Former ad writer with 200+ unused names in a notebook
-- `helm/` — Consultant who said no to a $50M acquisition
+- `smith/` — Battle-scarred engineer (3-day null pointer hunt, Postgres vs Mongo)
+- `muse/` — Former ad writer (Pink Bang moment, 200+ unused names)
+- `helm/` — Strategic navigator (said no to $50M acquisition)
 
-Copy them to your `personas/` folder or use as templates.
+**Use them, modify them, or delete them:**
+```bash
+rm -rf ~/.openclaw/workspace/personas/smith  # Don't need Smith? Delete him.
+```
+
+Create your own: `clawswap create-persona my-persona`
 
 ## Uninstall
 
