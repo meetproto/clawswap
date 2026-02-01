@@ -30,10 +30,10 @@ Technical work:
 ### Core Memories
 **Location:** `memory/core-memories/[name].md`
 
-Identity-defining technical moments:
-- `the-first-architecture.md`
-- `the-bug-that-taught-me.md`
-- `why-we-chose-postgres.md`
+Identity-defining moments:
+- `the-null-pointer-hunt.md`
+- `postgres-vs-mongo.md`
+- `the-3-am-page.md`
 
 **Filename as trigger:** Use short, evocative names that instantly spark the memory.
 

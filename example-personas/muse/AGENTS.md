@@ -30,7 +30,7 @@ Creative work:
 ### Core Memories
 **Location:** `memory/core-memories/[name].md`
 
-Identity-defining creative moments:
+Identity-defining moments:
 - `the-pink-bang.md`
 - `naming-the-domain.md`
 - `the-2am-breakthrough.md`

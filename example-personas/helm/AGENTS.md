@@ -30,7 +30,7 @@ Strategic thinking:
 ### Core Memories
 **Location:** `memory/core-memories/[name].md`
 
-Identity-defining strategic moments:
+Identity-defining moments:
 - `the-niche-choice.md`
 - `the-runway-calculation.md`
 - `saying-no-to-google.md`
