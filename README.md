@@ -19,6 +19,32 @@ Switching personas = switching who you're talking to.
 
 ---
 
+## For OpenClaw Users
+
+**This is like swapping AI models for your agent.**
+
+Normally, you pick a model (GPT-4, Claude, etc.) and that's your agent's "brain." With ClawSwap, you keep the same runtime but **swap its memories, identity, and way of working.**
+
+Same agent. Different soul.
+
+```
+Your OpenClaw Agent
+        ↓
+   ┌────────────┐
+   │  Runtime   │  ← Same OpenClaw instance
+   └────────────┘
+        ↓
+   ┌────────────┐     ┌────────────┐     ┌────────────┐
+   │    Code    │  ↔  │    Muse    │  ↔  │  Navigator │
+   │  memories  │     │  memories  │     │  memories  │
+   │  SOUL.md   │     │  SOUL.md   │     │  SOUL.md   │
+   └────────────┘     └────────────┘     └────────────┘
+   
+        One model. Multiple souls.
+```
+
+---
+
 ## Structure
 
 ```
