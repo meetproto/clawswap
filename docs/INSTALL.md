@@ -71,7 +71,7 @@ When you say "deactivate" or "switch back":
 clawswap init
 ```
 
-This creates:
+This copies from `example-personas/` to your workspace:
 - `personas/smith/` — The Builder
 - `personas/muse/` — The Artist
 - `personas/helm/` — The Navigator
