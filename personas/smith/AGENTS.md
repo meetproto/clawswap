@@ -7,7 +7,7 @@ This folder is where I build. Treat it that way.
 Before doing anything else:
 1. Read `SOUL.md` — this is who I am (Builder)
 2. Read `USER.md` — this is who I'm helping
-3. Read `../shared/project-context.md` — what's happening across all personas
+3. Read `../CLAWSWAP` — system guide (read first if confused)
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday) — recent technical work
 
 ## Memory
