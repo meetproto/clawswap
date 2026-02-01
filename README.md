@@ -90,6 +90,12 @@ The `skill/scripts/` folder contains standalone Python scripts:
 
 ---
 
+## Website
+
+Full website coming soon. This repo currently contains the core system and skill files only.
+
+---
+
 ## Structure
 
 ```
