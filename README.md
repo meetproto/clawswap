@@ -27,6 +27,24 @@ Normally, you pick a model (GPT-4, Claude, etc.) and that's your agent's "brain.
 
 Same agent. Different soul.
 
+## Installation
+
+### Option 1: Install from ClawdHub (Coming Soon)
+```
+/clawd install clawswap
+```
+
+### Option 2: Manual Install
+1. Download `clawswap-skill.skill` from this repo
+2. Place in your OpenClaw skills directory
+3. Restart OpenClaw
+
+### Option 3: Use the Scripts Directly
+The `skill/scripts/` folder contains standalone Python scripts:
+- `switch_persona.py [name]` — Switch to a persona
+- `list_personas.py` — List available personas  
+- `validate_persona.py [name]` — Check persona structure
+
 ```
 Your OpenClaw Agent
         ↓
