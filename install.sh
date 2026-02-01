@@ -75,6 +75,15 @@ else
     echo "   Install manually: sudo cp clawswap-skill.skill /usr/local/lib/node_modules/openclaw/skills/"
 fi
 
+# Copy CLAWSWAP.md to workspace
+if [ -f "CLAWSWAP.md" ]; then
+    cp "CLAWSWAP.md" "$WORKSPACE/"
+    echo "✅ CLAWSWAP.md installed"
+elif [ -f "repo/CLAWSWAP.md" ]; then
+    cp "repo/CLAWSWAP.md" "$WORKSPACE/"
+    echo "✅ CLAWSWAP.md installed"
+fi
+
 # Copy personas to workspace
 echo "👤 Setting up personas..."
 if [ -d "repo/personas" ]; then

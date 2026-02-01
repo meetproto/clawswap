@@ -100,6 +100,13 @@ def main():
             create_memory_structure(p_dir)
             print(f"✓ Created {persona}/ (empty)")
     
+    # Copy CLAWSWAP.md if exists
+    clawswap_md_src = source_dir / "CLAWSWAP.md"
+    clawswap_md_dst = workspace / "CLAWSWAP.md"
+    if clawswap_md_src.exists() and not clawswap_md_dst.exists():
+        shutil.copy(clawswap_md_src, clawswap_md_dst)
+        print("✓ CLAWSWAP.md installed")
+    
     print(f"\n{'='*60}")
     print("✓ Initialization complete!")
     print(f"{'='*60}\n")
@@ -108,6 +115,8 @@ def main():
     print(f"  {workspace / 'memory'}")
     print(f"\nPersonas are isolated at:")
     print(f"  {personas_dir}")
+    print(f"\nSystem guide:")
+    print(f"  {workspace / 'CLAWSWAP.md'}")
     
     print("\nTry it out:")
     print("  switch_persona.py smith")
