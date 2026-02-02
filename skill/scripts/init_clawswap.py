@@ -6,6 +6,7 @@ Safe installation - won't touch your existing memory.
 
 import shutil
 from pathlib import Path
+from datetime import datetime
 
 def get_workspace_root():
     """Find OpenClaw workspace root."""
@@ -26,17 +27,20 @@ def get_personas_dir():
     return get_workspace_root() / "personas"
 
 def get_clawswap_source():
-    """Find ClawSwap source directory."""
-    # Check common locations
-    possible_paths = [
-        Path(__file__).parent.parent.parent,  # skill/../..
-        Path.home() / ".openclaw" / "workspace" / "clawswap",
-        Path.cwd(),
-    ]
+    """Find ClawSwap source directory with personas."""
+    # Check skill installation location first
+    skill_dir = Path(__file__).parent.parent.parent  # skill/../..
+    if (skill_dir / "personas" / "smith" / "SOUL.md").exists():
+        return skill_dir
     
-    for path in possible_paths:
-        if (path / "personas" / "smith" / "SOUL.md").exists():
-            return path
+    # Check if personas are bundled with skill
+    if (skill_dir / "default-personas" / "smith" / "SOUL.md").exists():
+        return skill_dir / "default-personas"
+    
+    # Check workspace (for development)
+    workspace = Path.home() / ".openclaw" / "workspace" / "clawswap"
+    if (workspace / "personas" / "smith" / "SOUL.md").exists():
+        return workspace
     
     return None
 
@@ -48,10 +52,28 @@ def create_memory_structure(persona_path):
     highlights = memory / "highlights"
     highlights.mkdir(exist_ok=True)
     (highlights / "daily").mkdir(exist_ok=True)
+    (highlights / "weekly").mkdir(exist_ok=True)
     (highlights / "monthly").mkdir(exist_ok=True)
     (highlights / "yearly").mkdir(exist_ok=True)
     
     (memory / "core-memories").mkdir(exist_ok=True)
+
+def copy_persona(source_dir, personas_dir, persona_name):
+    """Copy a single persona from source to destination."""
+    src = source_dir / "personas" / persona_name
+    dst = personas_dir / persona_name
+    
+    if not src.exists():
+        print(f"  ✗ Source not found: {src}")
+        return False
+    
+    if dst.exists():
+        shutil.rmtree(dst)
+    
+    shutil.copytree(src, dst)
+    create_memory_structure(dst)
+    print(f"  ✓ {persona_name}/")
+    return True
 
 def main():
     workspace = get_workspace_root()
@@ -66,61 +88,101 @@ def main():
     print(f"Your memory: {workspace / 'memory'} (will NOT be touched)")
     print(f"Personas will be created at: {personas_dir}\n")
     
-    # Safety check
-    if personas_dir.exists():
-        print("⚠ Personas directory already exists.")
-        response = input("Overwrite? (y/N): ")
+    # Check if already initialized
+    if personas_dir.exists() and any(personas_dir.iterdir()):
+        print(f"⚠️  Personas directory already exists at: {personas_dir}")
+        response = input("Reinstall? This will backup existing personas. [y/N]: ")
         if response.lower() != 'y':
             print("Cancelled.")
             return
+        # Backup existing
+        backup_dir = personas_dir.parent / f"personas-backup-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        shutil.move(str(personas_dir), str(backup_dir))
+        print(f"Backed up to: {backup_dir}\n")
+        personas_dir.mkdir(parents=True)
     
     personas_dir.mkdir(parents=True, exist_ok=True)
     
-    if source_dir:
-        # Copy from ClawSwap source
-        source_personas = source_dir / "personas"
+    # Interactive persona selection
+    print("ClawSwap comes with 3 example personas:")
+    print("  🔧 smith — The Builder (code, debug, architecture)")
+    print("  🎨 muse — The Artist (write, name, brand)")
+    print("  🧭 helm — The Navigator (strategy, plan, roadmap)")
+    print("")
+    print("Select installation option:")
+    print("  1) Install ALL default personas")
+    print("  2) Install NONE (create your own later)")
+    print("  3) Choose which to install individually")
+    print("")
+    
+    choice = input("Enter choice [1/2/3]: ").strip()
+    
+    installed = []
+    
+    if choice == "1":
+        print("\nInstalling all personas...")
+        if source_dir:
+            for persona in ["smith", "muse", "helm"]:
+                if copy_persona(source_dir, personas_dir, persona):
+                    installed.append(persona)
+        else:
+            print("⚠️  Source not found. Creating empty structure...")
+            for persona in ["smith", "muse", "helm"]:
+                p_dir = personas_dir / persona
+                p_dir.mkdir(exist_ok=True)
+                create_memory_structure(p_dir)
+                print(f"  ✓ {persona}/ (empty)")
+                installed.append(persona)
+                
+    elif choice == "2":
+        print("\nSkipping default personas.")
+        print("Create your own later with: clawswap create-persona <name>")
         
-        for persona in ["smith", "muse", "helm"]:
-            src = source_personas / persona
-            dst = personas_dir / persona
+    elif choice == "3":
+        print("")
+        if not source_dir:
+            print("⚠️  Source not found. Cannot install individual personas.")
+            return
             
-            if src.exists():
-                if dst.exists():
-                    shutil.rmtree(dst)
-                shutil.copytree(src, dst)
-                create_memory_structure(dst)
-                print(f"✓ Created {persona}/")
-            else:
-                print(f"✗ Source not found: {src}")
-    else:
-        print("⚠ ClawSwap source not found. Creating empty structure...")
         for persona in ["smith", "muse", "helm"]:
-            p_dir = personas_dir / persona
-            p_dir.mkdir(exist_ok=True)
-            create_memory_structure(p_dir)
-            print(f"✓ Created {persona}/ (empty)")
+            response = input(f"Install {persona}? [y/N]: ").strip()
+            if response.lower() == 'y':
+                if copy_persona(source_dir, personas_dir, persona):
+                    installed.append(persona)
+    else:
+        print("Invalid choice. Installing all personas by default...")
+        if source_dir:
+            for persona in ["smith", "muse", "helm"]:
+                if copy_persona(source_dir, personas_dir, persona):
+                    installed.append(persona)
     
     # Copy CLAWSWAP.md if exists
-    clawswap_md_src = source_dir / "CLAWSWAP.md"
-    clawswap_md_dst = workspace / "CLAWSWAP.md"
-    if clawswap_md_src.exists() and not clawswap_md_dst.exists():
-        shutil.copy(clawswap_md_src, clawswap_md_dst)
-        print("✓ CLAWSWAP.md installed")
+    if source_dir:
+        clawswap_md_src = source_dir / "CLAWSWAP.md"
+        clawswap_md_dst = workspace / "CLAWSWAP.md"
+        if clawswap_md_src.exists() and not clawswap_md_dst.exists():
+            shutil.copy(clawswap_md_src, clawswap_md_dst)
+            print("\n✓ CLAWSWAP.md installed")
     
     print(f"\n{'='*60}")
     print("✓ Initialization complete!")
     print(f"{'='*60}\n")
     
-    print("Your original memory is safe at:")
+    if installed:
+        print(f"Installed personas: {', '.join(installed)}")
+    
+    print(f"\nYour original memory is safe at:")
     print(f"  {workspace / 'memory'}")
     print(f"\nPersonas are isolated at:")
     print(f"  {personas_dir}")
-    print(f"\nSystem guide:")
-    print(f"  {workspace / 'CLAWSWAP.md'}")
+    if (workspace / "CLAWSWAP.md").exists():
+        print(f"\nSystem guide:")
+        print(f"  {workspace / 'CLAWSWAP.md'}")
     
-    print("\nTry it out:")
-    print("  switch_persona.py smith")
-    print("  list_personas.py")
+    if installed:
+        print("\nTry it out:")
+        for persona in installed[:3]:  # Show first 3
+            print(f"  activate {persona}")
     
     print(f"\n{'='*60}\n")
 

@@ -89,7 +89,15 @@ ls /usr/local/lib/node_modules/openclaw/skills/ | grep clawswap
 clawswap init
 ```
 
-This creates in your workspace:
+**Interactive selection:**
+```
+Select installation option:
+  [1] Install ALL default personas (smith, muse, helm)
+  [2] Install NONE (create your own later)
+  [3] Choose which to install individually
+```
+
+**Default personas (if you choose to install):**
 - `personas/smith/` — The Builder (example)
 - `personas/muse/` — The Artist (example)
 - `personas/helm/` — The Navigator (example)

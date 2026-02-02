@@ -11,8 +11,9 @@ Switch between completely isolated AI personas. Each persona is a different bein
 ## Quick Start
 
 ```bash
-# Initialize personas (copies examples to your workspace)
+# Initialize personas (interactive selection)
 python3 skill/scripts/init_clawswap.py
+# Choose: [1] All personas  [2] None  [3] Select individually
 
 # Switch to a persona
 python3 skill/scripts/switch_persona.py smith

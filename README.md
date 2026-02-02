@@ -35,9 +35,10 @@ Your original agent files stay untouched.
 # Then: cp -r personas/ ~/.openclaw/workspace/
 ```
 
-### Option 2: One-Liner (now)
+### Option 2: One-Liner (interactive)
 ```bash
 curl -fsSL https://raw.githubusercontent.com/meetproto/clawswap/main/install.sh | bash
+# Choose: [1] All personas  [2] None  [3] Select individually
 ```
 
 ### Option 3: Manual
